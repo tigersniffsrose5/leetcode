@@ -1,0 +1,37 @@
+给定一个整数数组 A，返回其中元素之和可被 K 整除的（连续、非空）子数组的数目。
+
+ 
+
+示例：
+
+输入：A = [4,5,0,-2,-3,1], K = 5
+输出：7
+解释：
+有 7 个子数组满足其元素之和可被 K = 5 整除：
+[4, 5, 0, -2, -3, 1], [5], [5, 0], [5, 0, -2, -3], [0], [0, -2, -3], [-2, -3]
+
+题解：P[i]=A[0]+A[1]+...+A[i]。那么每个连续子数组的和sum(i, j)就可以写成
+P[j]-P[i-1],此时，判断子数组的和能否被KK整除就等价于判断
+(P[j] - P[i-1])modK == 0，根据 同余定理，只要P[j]bmodK == P[i-1]modK，
+就可以保证上面的等式成立。所以就是找前缀和模K相同的前缀和，他们之间的序列
+就一定可以整除k。我们可以维护一个以前缀和模K的值为键，出现次数为值的哈希表
+record，在遍历的同时进行更新。
+
+
+class Solution {
+public:
+    int subarraysDivByK(vector<int>& A, int K) {
+        unordered_map<int, int> record = {{0, 1}};
+        int sum = 0, ans = 0;
+        for (int elem: A) {
+            sum += elem;
+            // 注意 C++ 取模的特殊性，当被除数为负数时取模结果为负数，需要纠正
+            int modulus = (sum % K + K) % K;
+            if (record.count(modulus)) {
+                ans += record[modulus];
+            }
+            ++record[modulus];
+        }
+        return ans;
+    }
+};
