@@ -1,0 +1,37 @@
+给定一个二叉树，检查它是否是镜像对称的。
+
+ 
+
+例如，二叉树 [1,2,2,3,4,4,3] 是对称的。
+
+    1
+   / \
+  2   2
+ / \ / \
+3  4 4  3
+ 
+
+但是下面这个 [1,2,2,null,3,null,3] 则不是镜像对称的:
+
+    1
+   / \
+  2   2
+   \   \
+   3    3
+
+题解：递归。p 指针和 q 指针一开始都指向这棵树的根，随后 p 右移时，q 左移，p 左移时，q 右移。
+每次检查当前 p 和 q 节点的值是否相等，如果相等再判断左右子树是否对称。
+
+class Solution {
+public:
+    bool check(TreeNode *p, TreeNode *q) {
+        if (!p && !q) return true;   //如果子树都为空，则对称
+        if (!p || !q) return false;  //如果有一棵树为空，一棵树不为空，则一定不对称
+        return p->val == q->val && check(p->left, q->right) && check(p->right, q->left);
+    }
+
+    bool isSymmetric(TreeNode* root) {
+        return check(root, root);
+    }
+};
+
