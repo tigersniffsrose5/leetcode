@@ -1,0 +1,98 @@
+二叉搜索树中的两个节点被错误地交换。
+
+请在不改变其结构的情况下，恢复这棵树。
+
+示例 1:
+
+输入: [1,3,null,null,2]
+
+   1
+  /
+ 3
+  \
+   2
+
+输出: [3,1,null,null,2]
+
+   3
+  /
+ 1
+  \
+   2
+示例 2:
+
+输入: [3,1,4,null,null,2]
+
+  3
+ / \
+1   4
+   /
+  2
+
+输出: [2,1,4,null,null,3]
+
+  2
+ / \
+1   4
+   /
+  3
+
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+    void inorder(TreeNode* root, vector<int>& nums) {
+        if (root == nullptr) {
+            return;
+        }
+        inorder(root->left, nums);
+        nums.push_back(root->val);
+        inorder(root->right, nums);
+    }
+
+    pair<int,int> findTwoSwapped(vector<int>& nums) {
+        int n = nums.size();
+        int x = -1, y = -1;
+        for(int i = 0; i < n - 1; ++i) {
+            if (nums[i + 1] < nums[i]) {
+                y = nums[i + 1];
+                if (x == -1) {
+                    x = nums[i];
+                }
+                else break;
+            }
+        }
+        return {x, y};
+    }
+    
+    void recover(TreeNode* r, int count, int x, int y) {
+        if (r != nullptr) {
+            if (r->val == x || r->val == y) {
+                r->val = r->val == x ? y : x;
+                if (--count == 0) {
+                    return;
+                }
+            }
+            recover(r->left, count, x, y);
+            recover(r->right, count, x, y);
+        }
+    }
+
+    void recoverTree(TreeNode* root) {
+        vector<int> nums;
+        inorder(root, nums);
+        pair<int,int> swapped= findTwoSwapped(nums);
+        recover(root, 2, swapped.first, swapped.second);
+    }
+};
+
