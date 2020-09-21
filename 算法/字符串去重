@@ -35,18 +35,3 @@ void main(void){
 
 }
 
-只需要对字符串进行遍历，如果遍历到重复的字符就跳过，如果遍历到不重复的就赋值
-
-void Remove_1(char * str){
-	int index = 0;
-	int pos = 1;
-	while(str[pos] != '\0'){
-		if(str[pos] != '\0'){
-			index++;
-			str[index] = str[pos];
-		}
-		pos++;
-	}
-	str[++index] = '\0';
-}
-
