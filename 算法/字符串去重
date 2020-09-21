@@ -1,0 +1,52 @@
+1、问题描述
+
+  给出一串字符串，去掉重复的即可；
+
+  例：str = "abacdefabcde";
+
+  去重后：str = "abcdef";
+
+  算法思想：就是遍历一遍字符串，用一个alpha[]数组，将字符串的字符当做下标，出现一次后，将不再满足条件，保证了去重；
+
+
+
+2、代码实现
+
+#include<stdio.h>
+
+void main(void){
+    char str[] = "abacdefabcde";
+    char alpha[128] = {0};  //辅助空间，桶的思想
+    char res[80] = {0};  //存放去重后的结果字符串
+    int i;
+    int t = 0;
+
+    for(i = 0; str[i]; i++){
+        if(alpha[str[i]] == 0){
+            res[t++] = str[i];
+            alpha[str[i]]++;
+        }
+    }
+
+    for(i = 0; i < t; i++){
+        printf("%c", res[i]);
+    }
+    printf("\n");
+
+}
+
+只需要对字符串进行遍历，如果遍历到重复的字符就跳过，如果遍历到不重复的就赋值
+
+void Remove_1(char * str){
+	int index = 0;
+	int pos = 1;
+	while(str[pos] != '\0'){
+		if(str[pos] != '\0'){
+			index++;
+			str[index] = str[pos];
+		}
+		pos++;
+	}
+	str[++index] = '\0';
+}
+
