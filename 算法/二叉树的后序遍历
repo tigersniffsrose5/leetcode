@@ -1,0 +1,71 @@
+给定一个二叉树，返回它的 后序 遍历。
+
+示例:
+
+输入: [1,null,2,3]  
+   1
+    \
+     2
+    /
+   3 
+
+输出: [3,2,1]
+
+循环
+
+class Solution {
+public:
+    void postorder(TreeNode *root, vector<int> &res) {
+        if (root == nullptr) {
+            return;
+        }
+        postorder(root->left, res);
+        postorder(root->right, res);
+        res.push_back(root->val);
+    }
+
+    vector<int> postorderTraversal(TreeNode *root) {
+        vector<int> res;
+        postorder(root, res);
+        return res;
+    }
+};
+
+迭代
+
+void postOrder(BiTree pRoot)
+{
+	if (pRoot == NULL)
+		return;
+	stack<node>s;
+	BiTree p = pRoot;
+	node tmp;
+	while (p!=NULL || !s.empty())
+	{
+		while (p != NULL)		//沿左子树一直往下搜索，直至出现没有左子树的结点
+		{
+			node btn = (node)malloc(sizeof(Node));
+			btn->btnode = p;
+			btn->isfirst = true;
+			s.push(btn);
+			p = p->lchild;
+		}
+		if (!s.empty())
+		{
+			tmp = s.top();
+			s.pop();
+			if (tmp->isfirst == true)			//第一次出现在栈顶
+			{
+				tmp->isfirst = false;
+				s.push(tmp);
+				p = tmp->btnode->rchild;
+			}
+			else						//第二次出现在栈顶
+			{
+				cout << tmp->btnode->data<<" ";
+				p = NULL;
+			}
+		}
+	}
+}
+
