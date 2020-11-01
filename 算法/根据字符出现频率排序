@@ -40,16 +40,20 @@ public:
         string res = "";
         unordered_map<char, int> myMap;
         vector<pair<char, int>> myVec;
+        
         //统计所有的字母出现的频次
         for (int i = 0; i < s.size(); i++) {
             myMap[s[i]]++;
         }
+        
         //将字母及频次存入Vector，便于之后的排序
         for (auto it = myMap.begin(); it != myMap.end(); it++) {
             myVec.push_back(make_pair(it->first, it->second));
         }
+        
         //按照字母出现的频次从大到小进行排序
         sort(myVec.begin(), myVec.end(), [](const pair<char, int>& x, const pair<char, int>& y) -> int {return x.second > y.second;});
+  
         //将排序后的字母，根据其频次，依次添加对应数量的该字母进入结果字符串中
         for (auto it = myVec.begin(); it != myVec.end(); it++) {
             for (int i = 0; i < it->second; i++) {
