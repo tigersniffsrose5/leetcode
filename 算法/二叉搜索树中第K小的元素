@@ -28,7 +28,9 @@
 
 class Solution {
 public:
-    vector<int>order;
+    
+    vector<int> order;
+    
     void dfs(TreeNode* root)
     {
         if(root==nullptr)
@@ -37,10 +39,11 @@ public:
         order.push_back(root->val);
         dfs(root->right);
     }
-    int kthSmallest(TreeNode* root, int k) {
+
+    int kthSmallest(TreeNode* root, int k)
+    {
         dfs(root);
         return order[k-1];
-
     }
 };
 
