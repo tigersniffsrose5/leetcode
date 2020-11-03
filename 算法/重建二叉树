@@ -1,0 +1,42 @@
+输入某二叉树的前序遍历和中序遍历的结果，请重建该二叉树。假设输入的前序遍历和中序遍历的结果中都不含重复的数字。
+
+ 
+
+例如，给出
+
+前序遍历 preorder = [3,9,20,15,7]
+中序遍历 inorder = [9,3,15,20,7]
+返回如下的二叉树：
+
+    3
+   / \
+  9  20
+    /  \
+   15   7
+
+
+class Solution {
+public:
+    TreeNode* buildTree(vector<int> pre, vector<int> in) {
+        if(pre.size() == 0 || pre.size() != in.size()){
+            return nullptr;
+        }
+        
+        TreeNode* root = new TreeNode(pre[0]);
+        if(pre.size() == 1){
+            return root;
+        }
+        //在中序遍历中找出根节点所在位置
+        auto pos = find(in.begin(), in.end(), value);
+        //如果没找到，则返回NULL
+        if(pos == in.end()){
+            return nullptr;
+        }
+        int leftSize = pos - in.begin();
+        int rightSize = in.end() - pos - 1;
+        root->left = buildTree(vector<int>(pre.begin() + 1, pre.begin() + 1 + leftSize), vector<int>(in.begin(), in.begin() + leftSize));
+        root->right = buildTree(vector<int>(pre.begin() + 1 + leftSize, pre.end()), vector<int>(in.begin() + leftSize + 1, in.end()));
+        return root;   
+    }
+};
+
