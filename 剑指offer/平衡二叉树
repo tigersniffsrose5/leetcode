@@ -28,6 +28,8 @@
 
 判断当前节点的左右子树是否是平衡的，然后分别去判断左右子树的子树是否平衡
 
+先序遍历
+
 /**
  * Definition for a binary tree node.
  * struct TreeNode {
@@ -49,3 +51,21 @@ public:
         return max(depth(root->left), depth(root->right)) + 1;
     }
 };
+
+后序遍历
+
+class Solution {
+    bool isBalanced(TreeNode *root) {
+        return recur(root) != -1;
+    }
+
+    int recur(TreeNode *root) {
+        if (root == NULL) return 0;
+        int left = recur(root.left);
+        if(left == -1) return -1;
+        int right = recur(root.right);
+        if(right == -1) return -1;
+        return Math.abs(left - right) < 2 ? Math.max(left, right) + 1 : -1;
+    }
+}
+
