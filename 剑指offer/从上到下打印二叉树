@@ -32,7 +32,7 @@ public:
         queue<TreeNode *> q;
         q.push(root);
 
-        if ( root == null )
+        if ( root == NULL )
             return res;
 
         TreeNode *temp;
