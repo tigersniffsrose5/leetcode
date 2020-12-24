@@ -1,0 +1,43 @@
+Given a non-empty array of integers, return the k most frequent elements.
+
+Example 1:
+
+Input: nums = [1,1,1,2,2,3], k = 2
+Output: [1,2]
+1
+2
+Example 2:
+
+Input: nums = [1], k = 1
+Output: [1]
+1
+2
+
+#include <unodered_map>
+#include <queue>
+vector<int> topKFrequent(vector<int>& nums, int k)
+{
+	//<unordered_map>
+	//key-value == 数组值-频率
+	unordered_map<int, int> map;
+	for (int num : nums)//简单的循环方法
+	{
+		map[num]++;//求出每一个数的出现的频率value，类比灰度分布图
+	}
+
+	vector<int> res;
+	//<queue>
+	// pair<first, second>: first is frequency,  second is number
+	priority_queue<pair<int, int>> pq;                                   //c++默认大定堆
+	for (auto it = map.begin(); it != map.end(); it++)
+	{
+		pq.push(make_pair(it->second, it->first));//按频率进行排序即it->second
+		if (pq.size() > (int)map.size() - k)//找到前k个频率最大的数
+		{
+			res.push_back(pq.top().second);
+			pq.pop();
+		}
+	}
+	return res;
+}
+
