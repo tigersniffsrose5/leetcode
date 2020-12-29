@@ -9,6 +9,10 @@
 [2, 3, 1, 0, 2, 5, 3]
 输出：2 或 3 
 
+如果没有重复数字，那么正常排序后，数字i应该在下标为i的位置，所以思路是重头扫描数组，遇到下标为i的数字如果不是i的话，
+（假设为m),那么我们就拿与下标m的数字交换。在交换过程中，如果有重复的数字发生，那么终止返回ture
+
+
 class Solution {
 public:
     int findRepeatNumber(vector<int>& nums) {
@@ -26,3 +30,25 @@ public:
         return -1;
     }
 };
+
+哈希表 / Set
+
+class Solution {
+public:
+    int findrepaetNumber(vector<int> &nums) {
+
+        unordered_map<int, bool> map;
+
+        for ( int num : nums ) {
+            
+            if ( map[num] )
+                return num;
+
+            map[num] = true;
+        
+        }
+
+        return -1;
+
+    }
+}
