@@ -15,14 +15,50 @@
  *     ListNode(int x) : val(x), next(NULL) {}
  * };
  */
+
+递归
+
 class Solution {
 public:
     vector<int> reversePrint(ListNode* head) {
+
         vector<int> res;
+        
         if ( head == null )
             return res;
+        
         reversePrint(head->next);
         res.push_back(head->val);
+        
         return res;
+    
+    }
+};
+
+辅助栈
+
+class Solution {
+public:
+    vector<int> reversePrint(ListNode* head) {
+
+        stack<int> res;
+        vector<int> ans;
+
+        while ( head != NULL ) {
+
+            res.push(head->val);
+            head = head->next;
+
+        }
+
+        while ( !res.empty() ) {
+
+            ans.push_back(res.top());
+            res.pop();
+
+        }
+
+        return ans;
+
     }
 };
