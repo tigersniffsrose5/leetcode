@@ -12,7 +12,7 @@
 解释: 10 = 3 + 3 + 4, 3 × 3 × 4 = 36
 
 
-贪心法则：尽可能分解出多的 33，33 的个数为 a，得到余数 b 可能为 0，1，2：
+贪心法则：尽可能分解出多的 3，3 的个数为 a，得到余数 b 可能为 0，1，2：
 
 b = 0，返回 3^a;
 b = 1，我们将末尾的 3+1 分解成 2×2，因此返回 3^(a-1)*4;
@@ -21,12 +21,23 @@ b = 2，返回 3^a*2;
 class Solution {
 public:
     int cuttingRope(int n) {
-        if (n < 4)return n - 1;
-        int a = n / 3, b = n % 3;
-        if (b == 0)return a = pow(3, a);
-        if (b == 1)return a = pow(3, a-1) * 4;
-        if (b == 2)return a = pow(3, a) * 2;
+
+        if ( n < 4 )
+            return n - 1;
+        
+        int a = n/3, b = n%3;
+
+        if ( b == 0 )
+            return a = pow(3, a);
+        
+        if ( b == 1 )
+            return a = pow(3, a-1)*4;
+        
+        if ( b == 2 )
+            return a = pow(3, a)*2;
+        
         return a;
+    
     }
 };
 
