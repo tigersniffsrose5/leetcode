@@ -17,15 +17,39 @@
 解释：输入的二进制串 11111111111111111111111111111101 中，共有 31 位为 '1'。
 
 
-n&(n−1) 解析： 二进制数字 nn 最右边的 11 变成 00 ，其余不变。
+逐位计算
 
 class Solution {
 public:
     int hammingWeight(uint32_t n) {
+        
         int res = 0;
+
         while ( n != 0 ) {
+
+            res += n & 1;
+            n >>= 1;
+
+        }
+
+        return res;
+    }
+};
+
+
+n&(n−1) 解析： 二进制数字 nn 最右边的 1 变成 0 ，其余不变。
+
+class Solution {
+public:
+    int hammingWeight(uint32_t n) {
+        
+        int res = 0;
+        
+        while ( n != 0 ) {
+        
             res++;
             n &= n-1;
+        
         }
 
         return res;
