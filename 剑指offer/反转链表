@@ -1,7 +1,6 @@
 定义一个函数，输入一个链表的头节点，反转该链表并输出反转后链表的头节点。
 
  
-
 示例:
 
 输入: 1->2->3->4->5->NULL
@@ -12,14 +11,20 @@
 class Solution {
 public:
     ListNode *reverseList(ListNode *head) {
+
         ListNode *cur = NULL, *pre = head;
+        
         while ( pre != NULL ) {
+        
             LiseNode *temp = pre->next;
             pre->next = cur;
             cur = pre;
             pre = temp;
+        
         }
+
         return cur;
+    
     }
 };
 
@@ -29,11 +34,15 @@ public:
 class Solution {
 public:
     ListNode* reverseList(ListNode* head) {
+    
         while ( head == NULL || head->next == NULL )
             return head;
+        
         ListNode *ans = reverseList(head->next);
         head->next->next = head;
         head->next = NULL;
+        
         return ans;
+    
     }
 };
