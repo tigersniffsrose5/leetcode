@@ -35,18 +35,27 @@
 class Solution {
 public:
     TreeNode* mirrorTree(TreeNode* root) {
+
         stack<TreeNode*> s;
         s.push(root);
-        while (!s.empty()) {
-            TreeNode* node = s.top();
+        
+        while ( !s.empty() ) {
+        
+            TreeNode *node = s.top();
             s.pop();
-            if (node == NULL) {
+            
+            if ( node == NULL ) {
                 continue;
             }
+            
             swap(node->left, node->right);
             s.push(node->left);
             s.push(node->right);
+        
         }
+
         return root;
+    
     }
+
 };
