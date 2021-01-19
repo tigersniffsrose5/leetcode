@@ -36,21 +36,30 @@ public:
     vector<int> ret;
 
     vector<vector<int>> pathSum(TreeNode* root, int sum) {
+
         if ( !root )
             return {};
+        
         recur(root, sum);
         return ans;
+    
     }
 
     void recur(TreeNode *root, int sum) {
+    
         if ( !root )
             return;
+        
         ret.push_back(root->val);
         sum -= root->val;
+        
         if ( sum == 0 && !root->left && !root->right )
             ans.push_back(ret);
+        
         recur(root->left, sum);
         recur(root->right, sum);
         ret.pop_back();
+    
     }
+
 };
