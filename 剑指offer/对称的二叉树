@@ -7,7 +7,7 @@
   2   2
  / \ / \
 3  4 4  3
-但是下面这个 [1,2,2,null,3,null,3] 则不是镜像对称的:
+但是下面这个 [1,2,2,NULL,3,NULL,3] 则不是镜像对称的:
 
     1
    / \
@@ -26,7 +26,7 @@
   2   2
  / \ / \
 3  4 4  3
-但是下面这个 [1,2,2,null,3,null,3] 则不是镜像对称的:
+但是下面这个 [1,2,2,NULL,3,NULL,3] 则不是镜像对称的:
 
     1
    / \
@@ -47,14 +47,21 @@
 class Solution {
 public:
     bool isSubStructure(TreeNode *root) {
-        return root == null ? true : recur(root-<left, root->right);
+
+        return root == NULL ? true : recur(root-<left, root->right);
+    
     }
 
     bool recur ( TreeNode *A, TreeNode* B ) {
-        if ( A == null && B == null ) 
+    
+        if ( A == NULL && B == NULL ) 
             return true;
-        if ( A == null  || B == null || A->val != B->val )
+        
+        if ( A == NULL  || B == NULL || A->val != B->val )
             return false;
+        
         return recur(A->left, B->right) && recur(A->right, B->left);
+    
     }
+
 };
