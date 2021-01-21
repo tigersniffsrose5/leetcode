@@ -15,16 +15,21 @@
 class Solution {
 public:
     int majorityElement(vector<int>& nums) {
+
         //方法1：排序后中间的元素一定是出现超过一半的数字
         sort(nums.begin(),nums.end());
         return nums[nums.size()/2];
 
         //方法2：哈希表
-        unordered_map<int,int>mp;
-        for(auto it : nums){
+        unordered_map<int,int> mp;
+        
+        for ( auto it : nums ) {
+
             mp[it]++;
             if(mp[it]>nums.size()/2) return it;
+        
         }
+
         return 0;
 
         //3:摩尔投票法： 核心理念为 票数正负抵消 。此方法时间和空间复杂度分别为 O(N) 和 O(1) ，为本题的最佳解法。
@@ -46,11 +51,18 @@ public:
 返回值： 返回 x 即可；
         
         int x = 0, votes = 0;
-        for(int num : nums){
-            if(votes == 0) x = num;
+        
+        for ( int num : nums ) {
+
+            if ( votes == 0 )
+                x = num;
+
             votes += num == x ? 1 : -1;
+        
         }
+
         return x;
 
     }
+
 };
