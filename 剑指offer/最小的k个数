@@ -14,14 +14,18 @@
 class Solution {
 public :
     vector<int> getLeastNumber(vector<int>& arr, int k) {
+
         vector<int> vex(k, 0);
         sort(arr.begin(), arr.end());
+        
         for ( int i = 0; i < k; ++i ) {
             vex[i] = arr[i];
         }
         
         return vex;
+    
     }
+
 };
 
 大根堆,c++优先队列默认为大跟堆
@@ -29,25 +33,39 @@ public :
 class Solution {
 public:
     vector<int> getLeastNumbers(vector<int>& arr, int k) {
+    
         vector<int>vec(k, 0);
+        
         if (k == 0) { // 排除 0 的情况
             return vec;
         }
+        
         priority_queue<int> Q;
+        
         for (int i = 0; i < k; ++i) {
             Q.push(arr[i]);
         }
+        
         for (int i = k; i < (int)arr.size(); ++i) {
+        
             if (Q.top() > arr[i]) {
+            
                 Q.pop();
                 Q.push(arr[i]);
+            
             }
+
         }
+
         for (int i = 0; i < k; ++i) {
+        
             vec[i] = Q.top();
             Q.pop();
+        
         }
+
         return vec;
+    
     }
 };
 
