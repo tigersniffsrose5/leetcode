@@ -11,18 +11,27 @@ s = ""
 class Solution{
 public:
     char firstUniqChar(string s) {
+
         vecotr<char> keys;
         unordered_map<char, bool> dic;
+        
         for ( char c:s ) {
+        
             if ( dic.find(c) == dic.end() )
                 keys.push_back(c);
+            
             dic[c] = dic.find(c) == dic.end();
+        
         }
+
         for ( char c:keys ) {
+        
             if ( dic[c] )
                 return c;
+        
         }
         
         return '';
+    
     }
 };
