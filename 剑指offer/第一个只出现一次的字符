@@ -12,7 +12,7 @@ class Solution{
 public:
     char firstUniqChar(string s) {
 
-        vecotr<char> keys;
+        vector<char> keys;
         unordered_map<char, bool> dic;
         
         for ( char c:s ) {
@@ -31,7 +31,7 @@ public:
         
         }
         
-        return '';
+        return ' ';
     
     }
 };
