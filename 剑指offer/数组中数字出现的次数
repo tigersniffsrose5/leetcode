@@ -17,7 +17,8 @@ public:
     //输出: [3,5]
     vector<int> singleNumbers(vector<int>& nums) {
         int s = 0;
-        for (int num : nums) {
+
+        for ( int num : nums ) {
             s ^= num;
         }
         //s是只出现一次的2个数字的^ 记做数字a,b
@@ -46,16 +47,21 @@ public:
         //5  0101  第一组
         //第一组 1 1 5  第二组 2 3 2 这样我们就将2个只有一个的数 分到了2个数组里了
         vector<int> rs(2,0);
-        for(int num : nums){
-            if(num & k){
+
+        for ( int num : nums ) {
+            
+            if ( num & k ) {
                 //第二组
                 rs[0] ^= num;
-            }else{
+            }
+            else {
                 //第一组
                 rs[1] ^= num;
             }
         }
+
         return rs;
+    
     }
 };
 
